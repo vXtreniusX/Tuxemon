@@ -24,8 +24,8 @@ jobs:
             # Used to pull python distributions from actions/python-versions. Since there's a default, this is typically not supplied by the user.
             #token: # optional, default is ${{ github.token }}
       # Runs a single command using the runners shell
-      - name: Install dependencies
-        run: python3 -m pip install -r requirements.txt
+      #- name: Install dependencies
+      #  run: python3 -m pip install -r requirements.txt
 
       # Runs a set of commands using the runners shell
       - name: Build
