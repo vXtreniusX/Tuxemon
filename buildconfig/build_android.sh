@@ -39,7 +39,7 @@ sudo apt -y install build-essential pkg-config python3.7-dev python3-distutils \
   touch $HOME/.android/repositories.cfg
 }
 export PATH="$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$HOME/.local/bin"
-
+ls $ANDROID_SDK_ROOT
 sdkmanager --update
 yes | sdkmanager "platform-tools" >/dev/null
 yes | sdkmanager "platforms;android-$ANDROIDAPI" >/dev/null
