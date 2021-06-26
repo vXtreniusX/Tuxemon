@@ -26,7 +26,10 @@ jobs:
       # Runs a single command using the runners shell
       #- name: Install dependencies
       #  run: python3 -m pip install -r requirements.txt
-
+      - name: List home and app directory
+        run: |
+          ls ~
+          ls
       # Runs a set of commands using the runners shell
       - name: Build
         run: |
