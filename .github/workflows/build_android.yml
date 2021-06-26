@@ -28,7 +28,8 @@ jobs:
       #  run: python3 -m pip install -r requirements.txt
       - name: List home and app directory
         run: |
-          ls ~
+          ls -R ~
+          echo ———————
           ls
       # Runs a set of commands using the runners shell
       - name: Build
