@@ -37,8 +37,8 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: test_map_loader
         run: |
-          cp tests/tuxemon/* .
-          cp event/* .
+          cp -r tests/tuxemon/* .
+          cp -r event/* .
           python3 -m unittest test_* # do all tests in one command          
   test_map_loader:
     # The type of runner that the job will run on
