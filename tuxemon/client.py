@@ -44,7 +44,7 @@ from tuxemon.session import local_session
 from tuxemon.state import StateManager, State
 from tuxemon.map import TuxemonMap
 from tuxemon.platform.events import PlayerInput
-from typing import Iterable, Generator, Optional, Tuple, Mapping, Any
+from typing import Iterable, Generator, Optional, Tuple, Mapping, Any, Dict
 
 
 logger = logging.getLogger(__name__)
@@ -120,7 +120,7 @@ class Client(StateManager):
         self.event_engine = EventEngine(local_session)
         self.event_conditions = {}
         self.event_actions = {}
-        self.event_persist = {}
+        self.event_persist: Dict[str, Mapping[str, Any]] = {}
 
         # Set up a variable that will keep track of currently playing music.
         self.current_music = {"status": "stopped", "song": None, "previoussong": None}
@@ -249,13 +249,14 @@ class Client(StateManager):
 
         """
         for state in self.active_states:
-            game_event_returned = state.process_event(game_event)
-            if game_event_returned is None:
+            maybe_game_event = state.process_event(game_event)
+            if maybe_game_event is None:
                 break
+            game_event = maybe_game_event
         else:
-            game_event_returned = self.event_engine.process_event(game_event)
+            maybe_game_event = self.event_engine.process_event(game_event)
 
-        return game_event_returned
+        return maybe_game_event
 
     def main(self) -> None:
         """
