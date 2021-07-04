@@ -36,9 +36,31 @@ jobs:
         run: |
           copy buildconfig/setup_cx_freeze.py setup_cx_freeze.py
           python setup_cx_freeze.py build
-      - name: Upload artifact
+       
+      - name: Install nsis
+        run: |
+          Invoke-WebRequest -Uri ""https://netcologne.dl.sourceforge.net/project/nsis/NSIS%203/3.06.1/nsis-3.06.1-setup.exe"
+" -OutFile "nsis.exe"
+        .\nsis.exe /S
+      
+      - name: Build Installer
+        run: |
+          cd buildconfig
+          build_installer.bat
+          mkdir ../dist/
+          move tuxemon-installer.exe ../dist/.
+        shell: cmd
+        
+      - name: Upload build files
         uses: actions/upload-artifact@v2.2.4
         with:
           # Artifact name
             name: tuxemon_windows_binary
-            path: build/exe.* # A file, directory or wildcard pattern that describes what to upload 
+            path: build/exe.*
+            
+      - name: Upload installer
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          # Artifact name
+            name: tuxemon_windows_installer
+            path: dist
