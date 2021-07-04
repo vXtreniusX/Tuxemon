@@ -46,10 +46,9 @@ jobs:
       - name: Build Installer
         run: |
           cd buildconfig
-          build_installer.bat
+          cmd.exe /c "build_installer.bat"
           mkdir ../dist/
           move tuxemon-installer.exe ../dist/.
-        shell: cmd
         
       - name: Upload build files
         uses: actions/upload-artifact@v2.2.4
