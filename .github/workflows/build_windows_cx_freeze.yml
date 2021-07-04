@@ -38,16 +38,14 @@ jobs:
        
       - name: Install nsis
         run: |
-          Invoke-WebRequest -Uri ""https://netcologne.dl.sourceforge.net/project/nsis/NSIS%203/3.06.1/nsis-3.06.1-setup.exe"
-" -OutFile "nsis.exe"
-        .\nsis.exe /S
+          Invoke-WebRequest -Uri "https://netcologne.dl.sourceforge.net/project/nsis/NSIS%203/3.06.1/nsis-3.06.1-setup.exe" -OutFile "nsis.exe"
       
       - name: Build Installer
         run: |
           cd buildconfig
           cmd.exe /c "build_installer.bat"
           mkdir ../dist/
-          move tuxemon-installer.exe ../dist/.
+          mv tuxemon-installer.exe ../dist/.
         
       - name: Upload build files
         uses: actions/upload-artifact@v2.2.4
