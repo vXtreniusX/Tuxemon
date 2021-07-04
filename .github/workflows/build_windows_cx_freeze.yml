@@ -36,8 +36,6 @@ jobs:
         run: |
           copy buildconfig/setup_cx_freeze.py setup_cx_freeze.py
           python setup_cx_freeze.py build
-      - name: List build files (debug)
-        run: dir build
       - name: Upload artifact
         uses: actions/upload-artifact@v2.2.4
         with:
